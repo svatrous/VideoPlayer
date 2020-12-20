@@ -108,6 +108,12 @@ public extension VideoPlayer {
         return view
     }
     
+    func aspectRatio(_ value: UIView.ContentMode) -> Self {
+        var view = self
+        view.config.aspectRatio = value
+        return view
+    }
+    
     /// Trigger a callback when the buffer progress changes,
     /// the value is between 0 and 1.
     func onBufferChanged(_ handler: @escaping (Double) -> Void) -> Self {
