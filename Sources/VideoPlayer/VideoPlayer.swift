@@ -89,7 +89,7 @@ public extension VideoPlayer {
         
         var autoReplay: Bool = false
         var mute: Bool = false
-        var aspectRatio: UIView.ContentMode
+        var aspectRatio: UIView.ContentMode = .scaleAspectFit
         
         var handler: Handler = Handler()
     }
@@ -158,7 +158,7 @@ extension VideoPlayer: UIViewRepresentable {
             DispatchQueue.main.async { self.config.handler.onPlayToEndTime?() }
         }
         
-        uiView.contentModel = self.config.aspectRatio
+        uiView.contentMode = self.config.aspectRatio
         
         uiView.replay = {
             DispatchQueue.main.async { self.config.handler.onReplay?() }
@@ -187,7 +187,7 @@ extension VideoPlayer: UIViewRepresentable {
         play ? uiView.play(for: url) : uiView.pause(reason: .userInteraction)
         uiView.isMuted = config.mute
         uiView.isAutoReplay = config.autoReplay
-        uiView.contentModel = config.aspectRatio
+        uiView.contentMode = config.aspectRatio
         
         if let observerTime = context.coordinator.observerTime, time != observerTime {
             uiView.seek(to: time, toleranceBefore: time, toleranceAfter: time, completion: { _ in })
